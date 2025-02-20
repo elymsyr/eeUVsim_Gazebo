@@ -63,14 +63,14 @@ class MoveFins(Node):
         ### initialize fin dynamics classes ###
         self.finDynamics = FinDynamics(dynamics_parameters["finDynamics"])
 
-        self.fast_forward = self.fast_forward = rl_parameters["rl"]["fast_forward"]
+        self.fast_forward = rl_parameters["rl"]["fast_forward"]
 
         self.srv_client = self.create_client(SetEntityState, '/gazebo/set_entity_state')
         # Wait for the service to be available
         while not self.srv_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Service not available, waiting again...')
 
-        self.dt = 0.01  # seconds
+        self.dt = 0.01 # seconds
         if self.robot_model == "UCAT":
             self.fin_positions = {"FR_fin_link": [0.232, -0.096, -0.002],
                                   "BR_fin_link": [-0.226, -0.096, -0.002],
@@ -126,8 +126,8 @@ class MoveFins(Node):
         self.k_zd = 7.0  # rate of convergence for zero direction
         
         self.use_cpg = False
-        self.max_accereation = 64 # rad/s^2 
-        self.max_velocity = np.pi * 12
+        self.max_accereation = 32 # rad/s^2 
+        self.max_velocity = np.pi * 8
         self.e_prev = 0
 
         self.wrench_pub = self.create_publisher(WrenchStamped, '/ucat/force_fins', 10)

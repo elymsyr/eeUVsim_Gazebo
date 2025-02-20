@@ -1,17 +1,17 @@
 ### U-CAT dynamics params ###
 dynamics:
   geometry:
-    COG: [0.0, 0.0, -0.02]   # center of gravity
-    COB: [0.0, 0.0, 0.03]    # center of buoyancy
+    COG: [0.0, 0.0, -0.1]   # center of gravity
+    COB: [0.0, 0.0, 0.0]    # center of buoyancy
 
   inertial:
     mass:  18 #19.0  # [kg]
     # moment of inertia based on CAD model
-    Ixx: 0.45
+    Ixx: 0.1574
     Ixy: 0.0
     Ixz: 0.0
     Iyx: 0.0
-    Iyy: 0.3
+    Iyy: 0.46
     Iyz: 0.0
     Izx: 0.0
     Izy: 0.0
@@ -19,14 +19,14 @@ dynamics:
     added_mass:
       Xud: -40.0
       Yvd: -21.0
-      Zwd: -149.0 #(this makes it instable in pitch)
+      Zwd: -2.0 #(this makes it instable in pitch)
       Kpd: -0.1269
       Mqd: -1.2052
       Nrd: -2.3064
 
   drag:
     Xu: -28.542
-    Xuu: -21.98
+    Xuu: -11.98
     Yv: -100.7
     Yvv: -260.0
     Zw: -30.61
@@ -60,6 +60,14 @@ finDynamics:
     psi_fins: [-30.0, 210.0, -210.0, 30.0]
     frequency: 2.0
   simplified:
-    k_thrust: 0.005 #0.003
-    k_lateral: 1.9
+    k_thrust: 0.003 #0.003
+    k_lateral: 1.9 #1.9,
+  liftAndDrag:
+    water_density: 997.0
+    cd: 3.2
+    cl: 1.65
+    finArea: 0.02
+    finInertia: 2.8e-5
+    rc: 0.1
+    finLength: 0.18
 ###################################################

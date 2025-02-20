@@ -401,7 +401,12 @@ class AUVMotion(Node):
         new_orientation_state.twist.angular.x = self.vel[3]
         new_orientation_state.twist.angular.y = self.vel[4]
         new_orientation_state.twist.angular.z = self.vel[5]
-
+        
+        # check nan
+        if np.isnan(self.pos).any() or np.isnan(self.vel).any() or np.isnan(self.acc).any():
+            self.get_logger().error("Nan value detected in AUV state!")
+            return
+        
         self.state_publisher.publish(new_orientation_state)
 
         req.state = new_orientation_state

@@ -64,25 +64,17 @@ def generate_launch_description():
                         output='screen')
 
     # Node to control the robot's fins
-    fin_joint_controller = Node(package='uw_gazebo', executable='moveFins.py',
+    fin_joint_controller = Node(package='eeuv_sim', executable='moveFins.py',
                         parameters=[{'yaml_dynamics': "UCATDynamics.yaml",
                                      'robot_model': robot_model}],
                         output='screen')
 
     # Node to compute auv dynamics
-    auv_motion = Node(package='uw_gazebo', executable='AUVMotion.py',
+    auv_motion = Node(package='eeuv_sim', executable='AUVMotion.py',
                         parameters=[{'yaml_dynamics': "UCATDynamics.yaml",
                                      'robot_model': robot_model}],
                         output='screen')
 
-    # Node to compute auv dynamics
-    pressure = Node(package='uw_gazebo', executable='pressure.py',
-                        parameters=[{'robot_model': robot_model}],
-                        output='screen')
-
-    # Node to convert forces to fin kinematic parameters
-    wrench_driver = Node(package='uw_gazebo', executable='wrenchDriver.py',
-                        output='screen')
     return LaunchDescription([
 
         ExecuteProcess(
@@ -94,8 +86,6 @@ def generate_launch_description():
         node_robot_state_publisher,
         spawn_entity,
         auv_motion,
-        wrench_driver,
-        pressure,
         fin_joint_controller,
     ])
 
