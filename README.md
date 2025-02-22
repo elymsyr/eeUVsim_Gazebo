@@ -1,5 +1,5 @@
 # eeUVsim: Learning friendly ROS2 AUV simulator
-**Now the related paper is under the review, official release is after the decision**
+**The related paper had been accepted bt ICRA2025! Now we refactor here's code toward v.1.0 release**
 Fossen' physics model based multiple platform simulator including dynamics, reinforcement learning script, robot models, actuator models.
 
 eeUVsim has task oriented RL training script with randomize and repeating function
@@ -34,7 +34,7 @@ In UCAT case, you can launch fundamental scripts (motion controller, dynamics, r
 
 When you want to train surfacing controller, you can run
 
-`ros2 run eeuv_sim RL_UCAT.py`
+`ros2 run eeuv_sim RL_UCAT.py -o`
 
 Then iterative training will start.
 
