@@ -65,29 +65,24 @@ def generate_launch_description():
 
 
     # Node to compute auv dynamics
-    auv_motion = Node(package='uw_gazebo', executable='AUVMotion.py',
+    auv_motion = Node(package='eeuv_sim', executable='AUVMotion.py',
                         parameters=[{'yaml_dynamics': "LAUVDynamics.yaml",
                                      'robot_model': robot_model}],
                         output='screen')
     
     # Node to convert forces to wing kinematic parameters
-    wing_dynamics = Node(package='uw_gazebo', executable='wingDynamics.py',
+    wing_dynamics = Node(package='eeuv_sim', executable='wingDynamics.py',
                         parameters=[{'yaml_dynamics': "LAUVDynamics.yaml"}],
                         output='screen')
     
     # Node to move thrusters
-    move_thruster = Node(package='uw_gazebo', executable='moveThruster.py',
+    move_thruster = Node(package='eeuv_sim', executable='moveThruster.py',
                         parameters=[{'yaml_dynamics': "LAUVDynamics.yaml"}],
                         output='screen')
     
     # Node to move wings
-    move_wing = Node(package='uw_gazebo', executable='moveWing.py',
+    move_wing = Node(package='eeuv_sim', executable='moveWing.py',
                         parameters=[{'yaml_dynamics': "LAUVDynamics.yaml"}],
-                        output='screen')
-
-    # Node to compute auv dynamics
-    pressure = Node(package='uw_gazebo', executable='pressure.py',
-                        parameters=[{'robot_model': robot_model}],
                         output='screen')
 
     # Node to convert forces to fin kinematic parameters
@@ -99,7 +94,6 @@ def generate_launch_description():
         ),
         node_robot_state_publisher,
         spawn_entity,
-        pressure,
         auv_motion,
         wing_dynamics,
         move_thruster,

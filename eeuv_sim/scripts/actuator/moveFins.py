@@ -126,8 +126,8 @@ class MoveFins(Node):
         self.k_zd = 7.0  # rate of convergence for zero direction
         
         self.use_cpg = False
-        self.max_accereation = 32 # rad/s^2 
-        self.max_velocity = np.pi * 8
+        self.max_accereation = 64 # rad/s^2 
+        self.max_velocity = np.pi * 16
         self.e_prev = 0
 
         self.wrench_pub = self.create_publisher(WrenchStamped, '/ucat/force_fins', 10)
