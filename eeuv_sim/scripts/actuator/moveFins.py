@@ -6,6 +6,8 @@ Node to control the joints states on Gazebo
 @date: 08-01-2023
 """
 
+import numpy as np
+
 import sys
 import rclpy
 from rclpy import Future
@@ -15,7 +17,6 @@ from gazebo_msgs.msg import EntityState
 from gazebo_msgs.srv import SetEntityState
 import tf_transformations
 
-import numpy as np
 from ament_index_python.packages import get_package_share_directory
 import os
 import yaml

@@ -6,6 +6,8 @@ Node to update the robot's pose in Gazebo based on AUV dyanmics
 @contact: yuya.hamamatsu@taltech.ee
 """
 
+import numpy as np
+
 import rclpy
 from rclpy.node import Node
 from rclpy import Future
@@ -17,13 +19,12 @@ from gazebo_msgs.msg import EntityState
 from geometry_msgs.msg import WrenchStamped
 
 from tf_transformations import quaternion_from_euler
-import numpy as np
 import yaml
 import os
 
 import random
 
-from AUVDynamics import AUVDynamics
+from scripts.dynamics.AUVDynamics import AUVDynamics
 
 
 class AUVMotion(Node):

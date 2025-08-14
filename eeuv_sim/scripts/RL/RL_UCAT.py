@@ -18,7 +18,7 @@ import rclpy
 from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory
 
-import gym
+import gymnasium as gym
 from gym import spaces
 
 
@@ -76,8 +76,8 @@ class LearningLocomotion(gym.Env):
                                         high=np.array([2* np.pi, 2* np.pi, 2* np.pi, 2* np.pi]), dtype=np.float32)  # Angular velocity of FR, BR, BL, FL
             self.dt = 0.05
 
-        self.observation_space = spaces.Box(low=-float("inf"),
-                                            high=float("inf"),
+        self.observation_space = spaces.Box(low=-np.float64("inf"),
+                                            high=np.float64("inf"),
                                             shape=(self.observation_dimansion,), 
                                             dtype=np.float32)
         
@@ -267,13 +267,13 @@ class LearningLocomotion(gym.Env):
                 self.flippers_msg.flippers[i].zero_direction = 0.0
                 continue
             # setting fins frequency
-            self.flippers_msg.flippers[i].frequency = float(self.frequency)
+            self.flippers_msg.flippers[i].frequency = np.float64(self.frequency)
             # converting forces to amplitudes & setting fins amplitudes
-            self.flippers_msg.flippers[i].amplitude = float(action[i])
+            self.flippers_msg.flippers[i].amplitude = np.float64(action[i])
             # setting fins directions
-            self.flippers_msg.flippers[i].zero_direction = float(action[i + 4])
+            self.flippers_msg.flippers[i].zero_direction = np.float64(action[i + 4])
             # setting fins phase offsets
-            self.flippers_msg.flippers[i].phase_offset = float(self.phase_offset[i])     
+            self.flippers_msg.flippers[i].phase_offset = np.float64(self.phase_offset[i])
 
 
         self.rosnode.action_oci_pub.publish(self.flippers_msg)   

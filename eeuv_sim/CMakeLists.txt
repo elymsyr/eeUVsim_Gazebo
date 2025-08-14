@@ -24,6 +24,10 @@ find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(eeuv_sim_interfaces)
 
+# This installs the scripts directory as a proper Python package
+# so that imports like "from dynamics.wingDynamics" will work.
+ament_python_install_package(scripts)
+
 install(DIRECTORY
   launch
   data
@@ -33,31 +37,16 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}/
 )
 
-file(GLOB_RECURSE SCRIPT_FILES scripts/*.py)
+# This installs your nodes as executables so ROS can find and run them.
+file(GLOB_RECURSE SCRIPT_FILES
+    "scripts/*.py"
+    "scripts/actuator/*.py"
+    "scripts/dynamics/*.py"
+    "scripts/RL/*.py"
+)
 
 install(PROGRAMS ${SCRIPT_FILES}
     DESTINATION lib/${PROJECT_NAME}
 )
-
-# add_executable(test_drive src/example.cpp)
-# ament_target_dependencies(example
-#   rclcpp
-#   geometry_msgs
-# )
-
-# if(BUILD_TESTING)
-#   find_package(ament_cmake_gtest REQUIRED)
-#   find_package(ament_lint_auto REQUIRED)
-
-#   ament_lint_auto_find_test_dependencies()
-# endif()
-
-## Install C++ modules
-# install(
-#   TARGETS
-    # example
-  # DESTINATION
-#     lib/${PROJECT_NAME}
-# )
 
 ament_package()

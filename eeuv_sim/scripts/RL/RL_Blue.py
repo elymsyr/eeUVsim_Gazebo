@@ -18,7 +18,7 @@ import rclpy
 from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory
 
-import gym
+import gymnasium as gym
 from gym import spaces
 
 from std_msgs.msg import Bool, Float32MultiArray
@@ -66,11 +66,11 @@ class LearningLocomotion(gym.Env):
                                         high=np.array([4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]), dtype=np.float32)  # FR, BR, BL, FL / Amplitude, Zerodirection
         self.dt = 0.1
 
-        self.observation_space = spaces.Box(low=-float("inf"),
-                                            high=float("inf"),
+        self.observation_space = spaces.Box(low=-np.float64("inf"),
+                                            high=np.float64("inf"),
                                             shape=(self.observation_dimansion,), 
-                                            dtype=np.float32) 
-        
+                                            dtype=np.float64) 
+
         self.reset_msg = Bool()
         self.flippers_cmd = Float32MultiArray()
         self.flippers_cmd.data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

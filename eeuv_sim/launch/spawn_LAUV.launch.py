@@ -8,6 +8,8 @@ UCAT simulation launch file.
 
 import os
 
+import numpy as np
+
 from ament_index_python.packages import get_package_share_directory
 import launch_ros
 import launch
@@ -71,9 +73,9 @@ def generate_launch_description():
                         output='screen')
     
     # Node to convert forces to wing kinematic parameters
-    wing_dynamics = Node(package='eeuv_sim', executable='wingDynamics.py',
-                        parameters=[{'yaml_dynamics': "LAUVDynamics.yaml"}],
-                        output='screen')
+    # wing_dynamics = Node(package='eeuv_sim', executable='wingDynamics.py',
+    #                     parameters=[{'yaml_dynamics': "LAUVDynamics.yaml"}],
+    #                     output='screen')
     
     # Node to move thrusters
     move_thruster = Node(package='eeuv_sim', executable='moveThruster.py',
@@ -95,7 +97,7 @@ def generate_launch_description():
         node_robot_state_publisher,
         spawn_entity,
         auv_motion,
-        wing_dynamics,
+        # wing_dynamics,
         move_thruster,
         move_wing
     ])
